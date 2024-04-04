@@ -4,6 +4,7 @@ import fs from 'fs'
 import bodyParser from 'body-parser'
 import os from 'os'
 import cookieParser from 'cookie-parser'
+import path from 'path'
 
 const app = express()
 
@@ -11,9 +12,10 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(cookieParser())
 
+/*
 app.get('/', function (req, res) {
-
-    let readHTMLPromise = fs.promises.readFile('./week2.html', 'utf-8')
+    
+    let readHTMLPromise = fs.promises.readFile(path.resolve(path.join('src','week2.html')), 'utf-8')
     readHTMLPromise.then((html) => {
         res.status(200)
         res.send(html)
@@ -23,20 +25,24 @@ app.get('/', function (req, res) {
         console.log(err)
         console.log("Unknown Error occured during reading week2.html")
     })
+    
 })
+*/
+//ngnix how returns week2.html which is called index.html inside the ngnix
+
 
 app.post("/api/signup", async function (req, res) {
     let ifSuccess = true
 
     try {
-        let jsonUserDataPromise = await fs.promises.readFile('./userData.json', "utf8")
+        let jsonUserDataPromise = await fs.promises.readFile(path.resolve(path.join('src','userData.json')), "utf8")
         var newJsonUserData = JSON.parse(jsonUserDataPromise)
         newJsonUserData.push({
             "username": req.body.username,
             "password": req.body.password, "email": req.body.email
         })
         newJsonUserData = JSON.stringify(newJsonUserData)
-        await fs.promises.writeFile('./userData.json', newJsonUserData, "utf8")
+        await fs.promises.writeFile(path.resolve(path.join('src','userData.json')), newJsonUserData, "utf8")
     } catch (err) {
         res.status(400)
         res.send(err)
@@ -58,7 +64,7 @@ app.post('/api/login', async function (req, res) {
     })
 
     try {
-        var userData = await fs.promises.readFile('./userData.json', 'utf-8')
+        var userData = await fs.promises.readFile(path.resolve(path.join('src','userData.json')), 'utf-8')
 
     } catch (err) {
         res.status(400)
@@ -87,7 +93,7 @@ app.post('/api/login', async function (req, res) {
 
 app.get('/api/users', async function (req, res) {
     try {
-        var userData = await fs.promises.readFile('./userData.json', 'utf-8')
+        var userData = await fs.promises.readFile(path.resolve(path.join('src','userData.json')), 'utf-8')
     } catch (err) {
         res.status(400)
         res.send(err)
@@ -122,7 +128,7 @@ app.get('/api/users', async function (req, res) {
 
 app.get('/api/os', async function (req, res) {
     try {
-        var userData = await fs.promises.readFile('./userData.json', 'utf-8')
+        var userData = await fs.promises.readFile(path.resolve(path.join('src','userData.json')), 'utf-8')
     } catch (err) {
         res.status(400)
         res.send(err)
