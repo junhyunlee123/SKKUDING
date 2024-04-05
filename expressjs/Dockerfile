@@ -8,4 +8,5 @@ WORKDIR /app
 
 RUN npm install
 
-CMD ["node","src/index.js"]
+ENTRYPOINT ["node","src/index.js"]
+# ["node","src/index.js"] alternative

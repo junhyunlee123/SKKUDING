@@ -9,30 +9,42 @@ networks:
 
 services:
   nginx:
-    container_name: nginx
+    container_name: nginxLB
     image: nginx:1.25.4
     ports:
-      - 8000:8000
+      - "80:8000"
     volumes:
       - type: bind
-        source: ./nginx/nginx.conf
+        source: ./nginx.conf
         target: /etc/nginx/nginx.conf
       - type: bind
-        source: ./nginx/index.html
+        source: ../nginx/index.html
         target: /usr/share/nginx/html/index.html
     networks:
       - front-connection
       - back-connection
     environment:
       - TZ=Asia/Seoul
+    depends_on:
+      - expressjs1
+      - expressjs2
 
-  expressjs:
+  expressjs1:
     image: expressjs:1.1
-    container_name: expressjs
+    container_name: expressjs1
     expose:
-      - '3000:3000'
+      - "3000:3000"
     networks:
       - back-connection
+
+  expressjs2:
+    image: expressjs:1.1
+    container_name: expressjs2
+    expose:
+      - "3000:3000"
+    networks:
+      - back-connection
+
 
     
   
