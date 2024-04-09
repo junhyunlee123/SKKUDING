@@ -33,7 +33,7 @@ services:
     image: expressjs:1.1
     container_name: expressjs1
     expose:
-      - "3000:3000"
+      - "3000"
     networks:
       - back-connection
 
@@ -41,7 +41,7 @@ services:
     image: expressjs:1.1
     container_name: expressjs2
     expose:
-      - "3000:3000"
+      - "3000"
     networks:
       - back-connection
 
