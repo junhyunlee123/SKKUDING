@@ -1,4 +1,4 @@
-FROM node:21-alpine3.18
+FROM --platform=linux/amd64 node:21-alpine3.18
 
 COPY package.json /app/
 COPY package-lock.json /app/
