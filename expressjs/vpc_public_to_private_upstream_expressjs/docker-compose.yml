@@ -1,6 +1,0 @@
-services:
-  expressjs:
-    image: expressjs:1.1
-    container_name: expressjs
-    ports:
-      - "3000:3000"
