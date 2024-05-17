@@ -4,8 +4,8 @@
 AWSCLIV2.pkg
 .DS_Store
 
-**/.terraform/*
- 
+#ignore large terraform files
+**/.terraform/* 
 # .tfstate files
 *.tfstate
 *.tfstate.*
