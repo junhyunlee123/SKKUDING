@@ -3,4 +3,3 @@
 *.csv
 AWSCLIV2.pkg
 .DS_Store
-terraform-provider-aws_v5.49.0_x5
