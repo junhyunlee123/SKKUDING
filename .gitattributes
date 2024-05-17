@@ -1,2 +1,4 @@
+terraform-provider-aws_v5.49.0_x5 filter=lfs diff=lfs merge=lfs -text
+terraform-provider-aws_v5.49.0_* filter=lfs diff=lfs merge=lfs -text
 terraform-provider-aws filter=lfs diff=lfs merge=lfs -text
 terraform-provider-aws* filter=lfs diff=lfs merge=lfs -text

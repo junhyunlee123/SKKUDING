@@ -1,0 +1,10 @@
+*.pem
+*.cer
+*.csv
+AWSCLIV2.pkg
+.DS_Store
+**/.terraform/*
+ 
+# .tfstate files
+*.tfstate
+*.tfstate.*

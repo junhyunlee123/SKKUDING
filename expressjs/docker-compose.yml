@@ -1,0 +1,36 @@
+networks:
+  front-connection:
+    driver: bridge
+  back-connection:
+    driver: bridge
+
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.25.4
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: ./nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+      - type: bind
+        source: ./nginx/index.html
+        target: /usr/share/nginx/html/index.html
+    networks:
+      - front-connection
+      - back-connection
+    environment:
+      - TZ=Asia/Seoul
+
+  expressjs:
+    image: expressjs:1.1
+    container_name: expressjs
+    expose:
+      - "3000"
+    networks:
+      - back-connection
+
+    
+  
