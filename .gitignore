@@ -3,8 +3,9 @@
 *.csv
 AWSCLIV2.pkg
 .DS_Store
-**/.terraform/*
+
+#**/.terraform/*
  
 # .tfstate files
-*.tfstate
-*.tfstate.*
+#*.tfstate
+#*.tfstate.*
