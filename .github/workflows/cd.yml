@@ -21,7 +21,7 @@ jobs:
             with:
                 aws-region: ap-northeast-2
                 role-to-assume: arn:aws:iam::533267359186:role/GitHubAction-AssumeRoleWithAction
-                role-session-name: S3Access
+                role-session-name: GitHubAction-AssumeRoleWithAction
 
           - name: Upload HTML, CSS, Javascript files to S3
-            run: aws s3 sync S3_files/ s3://tf-files-for-nginx-expressjs-project/
+            run: aws s3 sync S3_files/* s3://tf-files-for-nginx-expressjs-project/
