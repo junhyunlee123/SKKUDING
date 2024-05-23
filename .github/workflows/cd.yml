@@ -20,7 +20,7 @@ jobs:
             uses: aws-actions/configure-aws-credentials@v4
             with:
                 aws-region: ap-northeast-2
-                role-to-assume: arn:aws:iam::533267359186:role/GitHubAction-AssumeRoleWithAction
+                role-to-assume: arn:aws:iam::533267359186:role/GithubAction
                 role-session-name: S3Access
 
           - name: Upload HTML, CSS, Javascript files to S3
