@@ -24,8 +24,5 @@ jobs:
                 role-session-name: S3Access
 
           - name: Upload HTML, CSS, Javascript files to S3
-            run: pwd && ls -al && aws s3 sync S3_files/home.html s3://tf-files-for-nginx-expressjs-project/ && -
-                aws s3 sync S3_files/index.html s3://tf-files-for-nginx-expressjs-project/ && -
-                aws s3 sync S3_files/script.js s3://tf-files-for-nginx-expressjs-project/ && -
-                aws s3 sync S3_files/style.css s3://tf-files-for-nginx-expressjs-project/
+            run: aws s3 sync S3_files s3://tf-files-for-nginx-expressjs-project/
                 
