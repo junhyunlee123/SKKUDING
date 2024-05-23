@@ -25,6 +25,7 @@ jobs:
 
           - name: Upload HTML, CSS, Javascript files to S3
             run: aws s3 sync S3_files s3://tf-files-for-nginx-expressjs-project/
+
     Update_ECR_Container:
         name: Update_ECR_Container
         runs-on: ubuntu-latest
@@ -56,6 +57,7 @@ jobs:
               context: "{{defaultContext}}:expressjs"
               push: true
               tags: ${{ steps.login-ecr.outputs.registry }}/skkuding_expressjs:latest
+              
     Terraform_Apply:
         name: Terraform Apply
         needs: [AWS_S3_Sync, Update_ECR_Container]
