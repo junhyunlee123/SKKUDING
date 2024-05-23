@@ -19,7 +19,7 @@ jobs:
           - name: Configure AWS Credentials
             uses: aws-actions/configure-aws-credentials@v4
             with:
-                aws-region: 
+                aws-region: ap-northeast-2
                 role-to-assume: arn:aws:iam::533267359186:role/GitHubAction-AssumeRoleWithAction
                 role-session-name: S3Access
 
