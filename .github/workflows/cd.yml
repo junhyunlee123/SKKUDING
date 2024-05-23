@@ -52,6 +52,6 @@ jobs:
                 REPOSITORY: skkuding_expressjs
                 IMAGE_TAG: ${{ github.sha }}
             run: |
-                docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+                docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG ./expressjs/ &&
                 docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG    
 
