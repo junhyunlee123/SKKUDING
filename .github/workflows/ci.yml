@@ -16,11 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [javascript]
-
-    # Specify the container in which actions will run
-    container:
-      image: codeql-container
+        language: ['javascript']
 
     steps:
       - name: Checkout repository
