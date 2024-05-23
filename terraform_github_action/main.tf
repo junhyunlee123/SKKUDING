@@ -106,7 +106,7 @@ resource "aws_cloudfront_distribution" "s3_expressjs_distribution" {
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "terraform implementation of s3 and cloudfront part of nginx_expressjs project"
+  comment             = "terraform implementation of s3 and cloudfront part of nginx_expressjs project using Github Action"
   default_root_object = "index.html"
 
   default_cache_behavior {

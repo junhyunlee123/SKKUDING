@@ -1,0 +1,7 @@
+- name: Build, tag, and push docker image to Amazon ECR
+  env:
+        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        REPOSITORY: skkuding_expressjs
+        IMAGE_TAG: ${{ github.sha }}
+  run: |
+        docker build -t $REGISTRY/$REPOSITORY:latest ./expressjs/ && docker push $REGISTRY/$REPOSITORY:latest
