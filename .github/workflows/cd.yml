@@ -45,13 +45,12 @@ jobs:
           - name: Login to Amazon ECR
             id: login-ecr
             uses: aws-actions/amazon-ecr-login@v2
-        
           - name: Set up Docker Buildx
             uses: docker/setup-buildx-action@v3
-          - name: Build and push
             env:
               registry: ${{ steps.login-ecr.outputs.registry }}
               repository: skkuding_expressjs
+          - name: Build and push
             # use environemtn variables to reference registry and repository
             uses: docker/build-push-action@v5
             with:
