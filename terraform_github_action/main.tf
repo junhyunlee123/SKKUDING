@@ -12,73 +12,12 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
-/*
-# Create a VPC
-resource "aws_vpc" "example" {
-  cidr_block = "10.0.0.0/16"
-}
-*/
-
-resource "aws_s3_bucket" "tf_bucket" {
+data "aws_s3_bucket" "s3_bucket" {
   bucket = "tf-files-for-nginx-expressjs-project"
-
-  tags = {
-    Name        = "expressjs project website bucket"
-    Environment = "Dev"
-  }
 }
-
-resource "aws_s3_object" "index_html" {
-  bucket = aws_s3_bucket.tf_bucket.id
-  key    = "index.html"
-  source = "../S3_files/index.html"
-  content_type = "text/html"
-
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("../S3_files/index.html")
-}
-
-resource "aws_s3_object" "home_html" {
-  bucket = aws_s3_bucket.tf_bucket.id
-  key    = "home.html"
-  source = "../S3_files/home.html"
-  content_type = "text/html"
-
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("../S3_files/home.html")
-}
-
-resource "aws_s3_object" "script_js" {
-  bucket = aws_s3_bucket.tf_bucket.id
-  key    = "script.js"
-  source = "../S3_files/script.js"
-  content_type = "application/javascript"
-
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("../S3_files/script.js")
-}
-
-resource "aws_s3_object" "style_css" {
-  bucket = aws_s3_bucket.tf_bucket.id
-  key    = "style.css"
-  source = "../S3_files/style.css"
-  content_type = "text/css"
-
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("../S3_files/style.css")
-}
-
 
 resource "aws_s3_bucket_website_configuration" "website_config" {
-  bucket = aws_s3_bucket.tf_bucket.id
+  bucket = data.aws_s3_bucket.s3_bucket.id
 
   index_document {
     suffix = "index.html"
@@ -110,12 +49,12 @@ data "aws_iam_policy_document" "policy_document" {
 }
 
 resource "aws_s3_bucket_policy" "attach_policy_to_s3" {
-  bucket = aws_s3_bucket.tf_bucket.id
+  bucket = data.aws_s3_bucket.s3_bucket.id
   policy = data.aws_iam_policy_document.policy_document.json
 }
 
 resource "aws_s3_bucket_public_access_block" "public_access" {
-  bucket = aws_s3_bucket.tf_bucket.id
+  bucket = data.aws_s3_bucket.s3_bucket.id
 
   block_public_acls       = true
   block_public_policy     = false
@@ -150,7 +89,7 @@ data "aws_lb" "api_alb" {
 
 resource "aws_cloudfront_distribution" "s3_expressjs_distribution" {
   origin {
-    domain_name              = aws_s3_bucket.tf_bucket.bucket_domain_name
+    domain_name              = data.aws_s3_bucket.s3_bucket.bucket_domain_name
     origin_id                = local.s3_origin_id
   }
 
