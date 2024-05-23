@@ -31,49 +31,49 @@ resource "aws_s3_bucket" "tf_bucket" {
 resource "aws_s3_object" "index_html" {
   bucket = aws_s3_bucket.tf_bucket.id
   key    = "index.html"
-  source = "./S3_files/index.html"
+  source = "../S3_files/index.html"
   content_type = "text/html"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("./S3_files/index.html")
+  etag = filemd5("../S3_files/index.html")
 }
 
 resource "aws_s3_object" "home_html" {
   bucket = aws_s3_bucket.tf_bucket.id
   key    = "home.html"
-  source = "./S3_files/home.html"
+  source = "../S3_files/home.html"
   content_type = "text/html"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("./S3_files/home.html")
+  etag = filemd5("../S3_files/home.html")
 }
 
 resource "aws_s3_object" "script_js" {
   bucket = aws_s3_bucket.tf_bucket.id
   key    = "script.js"
-  source = "./S3_files/script.js"
+  source = "../S3_files/script.js"
   content_type = "application/javascript"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("./S3_files/script.js")
+  etag = filemd5("../S3_files/script.js")
 }
 
 resource "aws_s3_object" "style_css" {
   bucket = aws_s3_bucket.tf_bucket.id
   key    = "style.css"
-  source = "./S3_files/style.css"
+  source = "../S3_files/style.css"
   content_type = "text/css"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
   # etag = "${md5(file("path/to/file"))}"
-  etag = filemd5("./S3_files/style.css")
+  etag = filemd5("../S3_files/style.css")
 }
 
 
