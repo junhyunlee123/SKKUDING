@@ -4,5 +4,5 @@ jobs:
    echo:
      runs-on: ubuntu-latest
      steps:
-	- run: echo 'Hellworld, Github Actions!'
+      - run: echo 'Hellworld, Github Actions!'
 
