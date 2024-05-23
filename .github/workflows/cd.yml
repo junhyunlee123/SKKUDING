@@ -53,5 +53,29 @@ jobs:
                 IMAGE_TAG: ${{ github.sha }}
             run: |
                 docker build -t $REGISTRY/$REPOSITORY:latest ./expressjs/ &&
-                docker push $REGISTRY/$REPOSITORY:latest   
+                docker push $REGISTRY/$REPOSITORY:latest
+    Terraform_Apply:
+        name: Terraform Apply
+        needs: [AWS_S3_Sync, Update_ECR_Container]
+        runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            contents: read
+        
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@v4
+
+          - name: Configure AWS Credentials
+            uses: aws-actions/configure-aws-credentials@v4
+            with:
+                aws-region: ap-northeast-2
+                role-to-assume: arn:aws:iam::533267359186:role/GithubAction
+          - name: 'Install Terraform CLI'
+            uses: hashicorp/setup-terraform@v3
+          - name:  Execute 'terraform apply'
+            run: 'cd terraform/ && terraform apply'
+
+
+
 
