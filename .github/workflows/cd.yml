@@ -56,7 +56,6 @@ jobs:
               context: "{{defaultContext}}:expressjs"
               push: true
               tags: ${{ steps.login-ecr.outputs.registry }}/skkuding_expressjs:latest
-                
     Terraform_Apply:
         name: Terraform Apply
         needs: [AWS_S3_Sync, Update_ECR_Container]
