@@ -7,10 +7,10 @@ jobs:
         - run: echo 'Hellworld, Github Actions!'
     pwd-ls:
       name: PWD&LS
-      runs-on: ubuntu-letest
+      runs-on: ubuntu-latest
       steps:
-        - name: PWD
+        - name: Print_Working_Directory
           run: pwd
-        - name: List files
+        - name: List_Files_-al
           run: ls -al
 
