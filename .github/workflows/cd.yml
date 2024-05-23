@@ -1,0 +1,27 @@
+name: Continuous Deployment
+
+
+on: 
+    push:
+        branches: [main]
+jobs:
+    AWS_S3_Sync:
+        name: AWS S3 Sync
+        runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            contents: read
+        
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@v4
+
+          - name: Configure AWS Credentials
+            uses: aws-actions/configure-aws-credentials@v4
+            with:
+                aws-region: 
+                role-to-assume: arn:aws:iam::533267359186:role/GitHubAction-AssumeRoleWithAction
+                role-session-name: S3Access
+
+          - name: Upload HTML, CSS, Javascript files to S3
+            run: aws s3 sync S3_files/ s3://tf-files-for-nginx-expressjs-project/
