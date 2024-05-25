@@ -4,9 +4,9 @@ COPY package.json /app/
 COPY package-lock.json /app/
 COPY src /app/src/
 
-WORKDIR /app
+WORKDIR /app/src/
 
 RUN npm install
 
-ENTRYPOINT ["node","src/index.js"]
+ENTRYPOINT ["node","index.js"]
 # ["node","src/index.js"] alternative
