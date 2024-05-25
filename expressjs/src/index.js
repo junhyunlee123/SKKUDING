@@ -15,7 +15,7 @@ app.use(cookieParser())
 /*
 app.get('/', function (req, res) {
     
-    let readHTMLPromise = fs.promises.readFile(path.resolve(path.join('src','week2.html')), 'utf-8')
+    let readHTMLPromise = fs.promises.readFile(path.resolve('week2.html'), 'utf-8')
     readHTMLPromise.then((html) => {
         res.status(200)
         res.send(html)
@@ -35,14 +35,14 @@ app.post("/api/signup", async function (req, res) {
     let ifSuccess = true
 
     try {
-        let jsonUserDataPromise = await fs.promises.readFile(path.resolve(path.join('src','userData.json')), "utf8")
+        let jsonUserDataPromise = await fs.promises.readFile(path.resolve('userData.json'), "utf8")
         var newJsonUserData = JSON.parse(jsonUserDataPromise)
         newJsonUserData.push({
             "username": req.body.username,
             "password": req.body.password, "email": req.body.email
         })
         newJsonUserData = JSON.stringify(newJsonUserData)
-        await fs.promises.writeFile(path.resolve(path.join('src','userData.json')), newJsonUserData, "utf8")
+        await fs.promises.writeFile(path.resolve('userData.json'), newJsonUserData, "utf8")
     } catch (err) {
         res.status(400)
         res.send(err)
@@ -64,7 +64,7 @@ app.post('/api/login', async function (req, res) {
     })
 
     try {
-        var userData = await fs.promises.readFile(path.resolve(path.join('src','userData.json')), 'utf-8')
+        var userData = await fs.promises.readFile(path.resolve('userData.json'), 'utf-8')
 
     } catch (err) {
         res.status(400)
@@ -93,7 +93,7 @@ app.post('/api/login', async function (req, res) {
 
 app.get('/api/users', async function (req, res) {
     try {
-        var userData = await fs.promises.readFile(path.resolve(path.join('src','userData.json')), 'utf-8')
+        var userData = await fs.promises.readFile(path.resolve('userData.json'), 'utf-8')
     } catch (err) {
         res.status(400)
         res.send(err)
@@ -128,7 +128,7 @@ app.get('/api/users', async function (req, res) {
 
 app.get('/api/os', async function (req, res) {
     try {
-        var userData = await fs.promises.readFile(path.resolve(path.join('src','userData.json')), 'utf-8')
+        var userData = await fs.promises.readFile(path.resolve('userData.json'), 'utf-8')
     } catch (err) {
         res.status(400)
         res.send(err)
@@ -156,5 +156,10 @@ app.get('/api/os', async function (req, res) {
     res.status(401)
     res.send("Unauthorized user")
 
+})
+
+app.get('/api/health_check', async function(req, res){
+    res.send("Health Check Success")
+    res.status(200)
 })
 app.listen(3000)
